@@ -2,10 +2,8 @@ let newBtn = document.getElementById("newQuestion");
 let searchBtn = document.getElementById("searchBtn");
 let favouritBtn = document.getElementById("favourite");
 let submitBtn = document.getElementById("submitButton");
-
 let subjectInput = document.getElementById("subjectInput");
 let questionInput = document.getElementById("questionInput");
-
 let rightcontainer = document.getElementById("rightcontainer");
 let rightpart = document.getElementById("rightpart");
 let parent = document.getElementById("questionList");
@@ -160,8 +158,7 @@ parent.addEventListener('click', function (event) {
         updateInStorage(questionId, 1, question.isstar);
     }
 
-    // If the question was clicked (excluding the star icon)
-    
+    // If the question was clicked (excluding the star icon)    
     if (target.closest(".questionItem") && !target.dataset.type) {
         // console.log(target.closest(".questionItem"));
         let questionId = target.closest(".questionItem").dataset.questionId;
@@ -205,8 +202,6 @@ parent.addEventListener('click', function (event) {
         questiontoshow.appendChild(removeBtn);
 
         selectedquestion.appendChild(questiontoshow);
-
-        // selectedquestion.appendChild(displayResponses(question));
 
         // Response section
         let responsepart = document.createElement('div');
@@ -330,8 +325,6 @@ parent.addEventListener('click', function (event) {
                 addResponseToQuestion(questionId, name, responseText);
                 responseinput.value = "";
                 nametag.value = "";
-
-                // Render the responses
                 renderResponses(question.id);
             }
         });
@@ -355,93 +348,6 @@ parent.addEventListener('click', function (event) {
         });
     }
 });
-
-// // Function to display responses
-// function displayResponses(question) {
-//     const responseList = document.createElement('div');
-//     responseList.className = 'responseList';
-
-//     const sortedResponses = sortResponses(question.response);
-//     sortedResponses.forEach((response) => {
-//         let responseItem = document.createElement('div');
-//         responseItem.className = 'responses';
-
-//         let responseDataPart = document.createElement('span');
-//         responseDataPart.className = "responseDataPart";
-
-//         let name = document.createElement('h3');
-//         name.className = "personname";
-//         name.innerText = response.name + ':';
-
-//         let comment = document.createElement('p');
-//         comment.className = 'personcomment';
-//         comment.innerText = response.comment;
-
-//         responseDataPart.appendChild(name);
-//         responseDataPart.appendChild(comment);
-
-//         let responseReactPart = document.createElement('span');
-//         responseReactPart.className = "responseReactPart";
-
-//         let responseLikePart = document.createElement('span');
-//         responseLikePart.className = "responseLikePart";
-
-//         let upvotesign = document.createElement('button');
-//         upvotesign.className = "upvotesign";
-//         upvotesign.innerText = "+";
-
-//         let upvotecount = document.createElement("span");
-//         upvotecount.className = "upvotecount";
-//         upvotecount.innerText = response.upvote;
-
-//         responseLikePart.appendChild(upvotesign);
-//         responseLikePart.appendChild(upvotecount);
-
-//         let responseDislikePart = document.createElement('span');
-//         responseDislikePart.className = "responseDislikePart";
-
-//         let downvotesign = document.createElement('button');
-//         downvotesign.className = "downvotesign";
-//         downvotesign.innerText = "-";
-
-//         let downvotecount = document.createElement("span");
-//         downvotecount.className = "downvotecount";
-//         downvotecount.innerText = response.downvote;
-
-//         responseDislikePart.appendChild(downvotesign);
-//         responseDislikePart.appendChild(downvotecount);
-
-//         responseReactPart.appendChild(responseLikePart);
-//         responseReactPart.appendChild(responseDislikePart);
-
-//         responseItem.appendChild(responseDataPart);
-//         responseItem.appendChild(responseReactPart);
-//         responseList.appendChild(responseItem);
-
-//         // Add event listeners for upvote and downvote buttons
-//         upvotesign.addEventListener('click', function () {
-//             response.upvote++;
-//             updateInStorage(question.id, 2, response);
-//             upvotecount.innerText = response.upvote;
-
-//             // Re-render the responses
-//             renderResponses(question.id);
-//         });
-
-//         downvotesign.addEventListener('click', function () {
-//             response.downvote++;
-//             updateInStorage(question.id, 2, response);
-//             downvotecount.innerText = response.downvote;
-
-//             // Re-render the responses
-//             renderResponses(question.id);
-//         });
-//     });
-//     return responseList;
-// }
-
-// Function to render responses for a specific question
-
 function renderResponses(questionId) {
     const question = discussionData[questionId];
     const responseList = document.querySelector('.responseList');
@@ -591,7 +497,6 @@ function highlightText(text, searchQuery) {
     return text.replace(regex, '<span class="highlight">$1</span>');
 }
 
-
 // Starred questions functionality
 let isShowingStarred = true; // Track whether we are showing only starred questions
 
@@ -611,7 +516,6 @@ favouritBtn.addEventListener('click', function () {
             }
         }
     });
-
     // Toggle the state for next click
     isShowingStarred = !isShowingStarred;
 });
@@ -651,7 +555,6 @@ function sortResponses(responses) {
 
 setInterval(function () {
     const elements=parent.querySelectorAll(".questionItem");
-    // console.log(discussionData);
     elements.forEach((element)=>{
         element.querySelector(".timeLogged").innerText = getTimeDifference(discussionData[element.getAttribute("data-question-id")].createdAt);
         // console.log(element.querySelector(".timeLogged").innerText);
